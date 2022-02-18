@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+<title>Form</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <section>
+    <article class="form">
+      <h1>Registration form!</h1> 
+    </article>
+     <div class="container">
+      <form method = "POST" class = "contact-form">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" placeholder="Enter your name" class="name" id="firstName" name="First Name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="firstName">Last Name</label>
+          <input type="text" placeholder="Enter your last name" class="last_name" id="Last Name" name="Last Name" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="Date">Date of birth</label>
+          <input  type="text" name="Date" placeholder="Enter your date of birth (day, month, year) " class="date_of_birth" id="Date" required></input>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" placeholder="Enter your email" class = "email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="text" name="text" class="phone_number" placeholder="Enter your Phone number (+373)" id="phone" cols="5" rows="5" required></input>
+        </div>
+
+
+       <div class="form-group">
+          <label for="phone">SDL</label>
+          <input type="text" name="SDL"  placeholder="SDL permissions"class="sdl" id="sdl" required></input>
+        </div>
+         
+        <div class="checkbox-container">
+          <input type="checkbox" id="cb3">
+          <label  id="checkbox" name="2 year experience" for="cb3">2 year experience</label>
+          <input  type="text" class="answer" name="2 year experience"  placeholder="Yes/No"  id="answer" required></input>
+        </div>
+
+        <div class="cont">  
+          <button class="btn" type = "submit"><span>Submit</span><img src="https://i.cloudup.com/2ZAX3hVsBE-3000x3000.png" height="62" width="62"></button>
+          </div>
+      </form>
+    </div>
+    <div id="status"></div>
+    <div class="loader">
+      <span class="loader__element"></span>
+      <span class="loader__element"></span>
+      <span class="loader__element"></span>
+    </div>
+  </section>
+  <script src="./main.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+</form>
+
+<script>
+  const form = document.querySelector(".contact-form");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  let name = document.querySelector(".name").value;
+  let last_name = document.querySelector(".last_name").value;
+  let date_of_birth = document.querySelector(".date_of_birth").value;
+  let email = document.querySelector(".email").value;
+  let phone_number = document.querySelector(".phone_number").value;
+  let sdl = document.querySelector(".sdl").value;
+  let answer = document.querySelector(".answer").value;
+ 
+  document.querySelector(".contact-form").reset();
+
+  sendEmail(name, last_name,  date_of_birth, email, phone_number, sdl, answer);
+})
+function sendEmail(name, last_name,  date_of_birth, email, phone_number, sdl, answer){
+  Email.send({
+      
+    Host: "smtp.gmail.com", 
+    Username: "form.com2022@gmail.com",
+    Password: "Traiangeox",
+    To: "spinu.vadim712@gmail.com",
+    From: "form.com2022@gmail.com",
+    Subject: `${name} Just messaged you from the website form`,
+    Body: `Name: ${name} <br> Last Name: ${last_name} <br> Date of birth: ${date_of_birth} <br> Email: ${email} <br> Phone Number: ${phone_number} <br> SDL: ${sdl} <br> 2 year experience: ${answer} <br>`,
+  }).then((success) => {
+   
+    alert("message sent successfully. Please check the spam folder in your mail.");
+  }).catch((error) => {
+      
+    alert("error sending message");
+  })
+}
+</script>
+
+</body>
+</html>
